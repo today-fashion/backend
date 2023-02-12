@@ -1,15 +1,14 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Auth } from './entity/auth.entity';
+import { AuthEntity } from './entity/auth.entity';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @Inject('AUTH_REPOSITORY') 
-    private authRepository: Repository<Auth>,
-  ) {}
-
-  async findAll(): Promise<Auth[]> {
-    return this.authRepository.find();
-  }
+    @InjectRepository(AuthEntity)
+    private authRepository: Repository<AuthEntity>
+  ) {};
+  
+  
 }
